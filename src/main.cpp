@@ -1,8 +1,9 @@
-#include "../include/Application.h"
-#include "./playground.h"
-
 #define WIDTH 640
 #define HEIGHT 480
+
+#include "Application.h"
+#include "./playground.h"
+
 
 int main()
 {

@@ -2,7 +2,7 @@
 // Created by s1nister on 3/7/24.
 //
 
-#include "../include/Application.h"
+#include "Application.h"
 #include "./utils.h"
 
 Application::Application(const uint32_t width, const uint32_t height, const char* windowTitle)

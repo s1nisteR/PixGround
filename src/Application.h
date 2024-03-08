@@ -5,7 +5,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include <SDL3/SDL.h>
+#include "../vendor/SDL/include/SDL3/SDL.h"
 
 class Application {
 public:
