@@ -49,24 +49,28 @@ Application::Application(const uint32_t width, const uint32_t height, const char
     SDL_SetTextureBlendMode(pTexture, SDL_BLENDMODE_BLEND); //set blendmode for alpha values to work
 
     //initialize our raw pixel buffer that is under the control of the user
-    buffer = new uint32_t *[m_width];
-    for(int i = 0; i < m_width; i++)
+    buffer = new uint32_t*[m_height];
+    for(int i = 0; i < m_height; ++i)
     {
-        buffer[i] = new uint32_t[m_height];
+        buffer[i] = new uint32_t [m_width];
     }
 
-    log("Texture Created Successfully!");
 
+    log("Texture Created Successfully!");
     log("Initialization Successful!");
+
 }
 
 void Application::run()
 {
-    for(int i = 0; i < m_width; i++)
+    //text filling the buffer
+
+    //flatten our 2D buffer into a 1D array of pixels which is then passed onto SDL
+    for(int i = 0; i < m_height; i++)
     {
-        for(int j = 0; j < m_height; j++)
+        for(int j = 0; j < m_width; j++)
         {
-            pPixels[i * m_height + j] = buffer[i][j];
+            pPixels[i * m_width + j] = buffer[i][j];
         }
     }
 
@@ -97,6 +101,5 @@ Application::~Application()
     SDL_DestroyRenderer(pRenderer);
     SDL_DestroyWindow(pWindow);
     free(pPixels);
-    free(buffer);
     SDL_Quit();
 }

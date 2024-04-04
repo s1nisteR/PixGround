@@ -1,23 +1,23 @@
+// - YOUR PIXEL PLAYGROUND
+
 void playground(Application *pApp)
 {
-    uint32_t** buf = pApp->getBuffer(); //get the 2D buffer that we can manipulate
+    //get access to the buffer that we...
+    uint32_t **buf = pApp->getBuffer();
 
-
-    //fill buffer with RED RGBA pixel values for half the screen width
-    for(int i = 0; i < WIDTH / 2; i++)
+    //...then modify by filling with all green pixels
+    for(int i = 0; i < HEIGHT; i++)
     {
-        for(int j = 0; j < HEIGHT; j++)
+        for(int j = 0; j < WIDTH; j++)
         {
-            buf[i][j] = 0xff0000ff;
+            //PIXEL FORMAT - 0x RR GG BB AA
+            buf[i][j] = 0x00FF00FF;
         }
     }
 
-    //fill bottom half with green pixels
-    for(int i = WIDTH / 2; i < WIDTH; i++)
+    //and then we draw a line by filling those certain pixels as black
+    for(int i = 0; i < WIDTH; i++)
     {
-        for(int j = 0; j < HEIGHT; j++)
-        {
-            buf[i][j] = 0x00ff00ff;
-        }
+        buf[50][i] = 0x00000000;
     }
 }

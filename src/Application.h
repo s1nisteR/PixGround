@@ -6,12 +6,14 @@
 #define APPLICATION_H
 
 #include "../vendor/SDL/include/SDL3/SDL.h"
+#include <utility>
+
 
 class Application {
 public:
     Application(uint32_t width, uint32_t height, const char* windowTitle);
     void run();
-    [[nodiscard]] uint32_t** getBuffer() const { return buffer; }
+    [[nodiscard]] uint32_t **getBuffer() { return buffer; }
     ~Application();
 
 private:
