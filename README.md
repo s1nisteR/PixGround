@@ -1,6 +1,8 @@
 # PixGround
 Your Pixel Playground!
 
+A _dead simple_ way to access pixels on your screen. PixGround provides you with a _digital sketchbook_ where you have complete control over every pixel displayed inside the viewport. Great for implementing and playing with Computer Graphics Algorithms!  
+
 [![PixGround](https://github.com/s1nisteR/PixGround/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/s1nisteR/PixGround/actions/workflows/cmake-multi-platform.yml)
 
 ## Usage
@@ -69,8 +71,9 @@ If you are on Linux you could now use ```make``` and then execute the program. I
 
 ## Demo
 All pixels set to white and drawing colored lines from bottom to top.
+![demo1](https://raw.githubusercontent.com/s1nisteR/PixGround/main/img/demo1.png)
 
-The following example demonstrates how to implement a simple DDA Line Drawing Algorithm.
+The following example demonstrates how to implement a simple DDA Line Drawing Algorithm:
 ```cpp
 // - YOUR PIXEL PLAYGROUND
 //DDA - Example
@@ -128,3 +131,4 @@ void playground(Application *pApp)
     DDA(450, 40, 60, 340, buf);
 }
 ```
+![demo2](https://raw.githubusercontent.com/s1nisteR/PixGround/main/img/demo2.png)
