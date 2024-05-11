@@ -4,7 +4,8 @@ Your Pixel Playground!
 [![PixGround](https://github.com/s1nisteR/PixGround/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/s1nisteR/PixGround/actions/workflows/cmake-multi-platform.yml)
 
 ## Usage
-```c++
+This will set all pixels to white and draw three vertical lines with different colors. Scroll below to see what it looks like!
+```cpp
 // - YOUR PIXEL PLAYGROUND
 
 //the height and width of our window
@@ -65,3 +66,65 @@ Run CMake:\
 ```cmake ..```
 
 If you are on Linux you could now use ```make``` and then execute the program. If you're on Windows, you could open the generated solution files in Visual Studio and then compile and run.
+
+## Demo
+All pixels set to white and drawing colored lines from bottom to top.
+
+The following example demonstrates how to implement a simple DDA Line Drawing Algorithm.
+```cpp
+// - YOUR PIXEL PLAYGROUND
+//DDA - Example
+#include <cmath>
+#include <cstdlib>
+#include <cmath>
+
+//the height and width of our window
+#define WIDTH 640
+#define HEIGHT 480
+
+// DDA Function for line generation
+void DDA(int X0, int Y0, int X1, int Y1, uint32_t **buf)
+{
+    // calculate dx & dy
+    int dx = X1 - X0;
+    int dy = Y1 - Y0;
+
+    // calculate steps required for generating pixels
+    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+
+    // calculate increment in x & y for each steps
+    float Xinc = dx / (float)steps;
+    float Yinc = dy / (float)steps;
+
+    // Put pixel for each step
+    float X = X0;
+    float Y = Y0;
+    for (int i = 0; i <= steps; i++) {
+        buf[std::lround(X)][std::lround(Y)] = 0xFF0000FF; //put red pixel at (X,Y)
+        X += Xinc; // increment in x at each step
+        Y += Yinc; // increment in y at each step
+    }
+}
+
+
+void playground(Application *pApp)
+{
+    //get access to the buffer that we have the control of
+    //buf[x][y] where x is the x-coordinate, y is the y-coordinate
+    uint32_t **buf = pApp->getBuffer();
+
+    for(int y = 0; y < HEIGHT; y++)
+    {
+        for(int x = 0; x < WIDTH; x++)
+        {
+            buf[x][y] = 0xFFFFFFFF;
+        }
+    }
+
+
+    // Function call
+    DDA(2, 2, 200, 250, buf);
+    DDA(70, 50, 20, 200, buf);
+    DDA(450, 40, 60, 340, buf);
+}
+```
