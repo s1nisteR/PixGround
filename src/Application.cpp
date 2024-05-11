@@ -28,7 +28,7 @@ Application::Application(const uint32_t width, const uint32_t height, const char
     log("Window Opened Successfully!");
 
     //create the renderer
-    pRenderer = SDL_CreateRenderer(pWindow, nullptr, SDL_RENDERER_ACCELERATED);
+    pRenderer = SDL_CreateRenderer(pWindow, nullptr, 0);
     if(pRenderer == nullptr)
     {
         logError();
