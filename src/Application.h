@@ -25,7 +25,8 @@ private:
     SDL_Window *pWindow;
     SDL_Renderer *pRenderer;
     SDL_Texture *pTexture;
-    uint32_t **buffer; //raw buffer that is under the control of the user
+    uint32_t **internalBuffer;
+    uint32_t  **buffer;         //raw buffer that is under the control of the user
     SDL_Event event{};
 };
 

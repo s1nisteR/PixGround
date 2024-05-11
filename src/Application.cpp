@@ -19,7 +19,7 @@ Application::Application(const uint32_t width, const uint32_t height, const char
     if(SDL_Init(SDL_INIT_VIDEO) != 0) logError();
 
     //create the window
-    pWindow = SDL_CreateWindow(m_windowTitle, static_cast<int>(m_width), static_cast<int>(m_height), NULL);
+    pWindow = SDL_CreateWindow(m_windowTitle, static_cast<int>(m_width), static_cast<int>(m_height), 0);
     if(pWindow == nullptr)
     {
         logError();
@@ -48,13 +48,19 @@ Application::Application(const uint32_t width, const uint32_t height, const char
     }
     SDL_SetTextureBlendMode(pTexture, SDL_BLENDMODE_BLEND); //set blendmode for alpha values to work
 
-    //initialize our raw pixel buffer that is under the control of the user
-    buffer = new uint32_t*[m_height];
+    //initialize our internalBuffer[height][width] or internalBuffer[y][x]
+    internalBuffer = new uint32_t*[m_height];
     for(int i = 0; i < m_height; ++i)
     {
-        buffer[i] = new uint32_t [m_width];
+        internalBuffer[i] = new uint32_t [m_width];
     }
 
+    //initialize the raw buffer[width][height] or buffer[x][y] that is under the control of the user
+    buffer = new uint32_t*[m_width];
+    for(int i = 0; i < m_width; ++i)
+    {
+        buffer[i] = new uint32_t [m_height];
+    }
 
     log("Texture Created Successfully!");
     log("Initialization Successful!");
@@ -65,12 +71,21 @@ void Application::run()
 {
     //text filling the buffer
 
+    //transpose raw buffer to internalBuffer
+    for(int i = 0; i < m_height; i++)
+    {
+        for(int j = 0; j < m_width; j++)
+        {
+            internalBuffer[i][j] = buffer[j][i];
+        }
+    }
+
     //flatten our 2D buffer into a 1D array of pixels which is then passed onto SDL
     for(int i = 0; i < m_height; i++)
     {
         for(int j = 0; j < m_width; j++)
         {
-            pPixels[i * m_width + j] = buffer[i][j];
+            pPixels[i * m_width + j] = internalBuffer[i][j];
         }
     }
 

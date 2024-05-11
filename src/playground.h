@@ -1,23 +1,28 @@
 // - YOUR PIXEL PLAYGROUND
 
+//the height and width of our window
+#define WIDTH 640
+#define HEIGHT 480
+
 void playground(Application *pApp)
 {
-    //get access to the buffer that we...
+    //get access to the buffer that we have the control of
+    //buf[x][y] where x is the x-coordinate, y is the y-coordinate
     uint32_t **buf = pApp->getBuffer();
 
-    //...then modify by filling with all green pixels
-    for(int i = 0; i < HEIGHT; i++)
+    for(int y = 0; y < HEIGHT; y++)
     {
-        for(int j = 0; j < WIDTH; j++)
+        for(int x = 0; x < WIDTH; x++)
         {
-            //PIXEL FORMAT - 0x RR GG BB AA
-            buf[i][j] = 0x00FF00FF;
+            buf[x][y] = 0xFFFFFFFF;
         }
     }
 
-    //and then we draw a line by filling those certain pixels as black
-    for(int i = 0; i < WIDTH; i++)
+    for(int i = 0; i < HEIGHT; i++)
     {
-        buf[50][i] = 0x00000000;
+        buf[50][i] = 0xFF0000FF;
+        buf[100][i] = 0x00FF00FF;
+        buf[150][i] = 0x0000FFFF;
     }
+
 }
